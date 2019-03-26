@@ -3,10 +3,10 @@
 * @brief Low level motor driver. Sets the direction of the motor and starts and stops it.
 */
 
+#include "elev.h"
+
 #ifndef MOTOR_H
 #define MOTOR_H
-
-#include "elev.h"
 
 /*
 * @brief Starts and stops the motor using the motor driver in elev.h.
