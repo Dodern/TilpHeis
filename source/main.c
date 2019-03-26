@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "motorController.h"
 #include "unitTest.h"
+#include <unistd.h>
 
 
 int main() {
@@ -11,7 +12,9 @@ int main() {
     
     
     while(1){
+        UnitTest__buttonsUnitTest();
         
+        sleep(1);
     }
 
     return 0;
