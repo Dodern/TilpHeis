@@ -14,4 +14,9 @@
 */
 void UnitTest__motorControllerUnitTest();
 
+/*
+* @brief Unit test of the light module.
+*/
+void UnitTest__lightUnitTest();
+
 #endif
