@@ -11,3 +11,11 @@ int IoHandler__getButtonStatus(int buttonMatrix[N_FLOORS][3]){
     Buttons__readButtons(buttonMatrix);
     return Buttons__readStopButton();
 }
+
+int IoHandler__getCurrentFloor(){
+    return currentFloor_;
+}
+
+int IoHandler__getLastFloor(){
+    return lastFloor_;
+}
