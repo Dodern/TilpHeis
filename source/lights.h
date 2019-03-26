@@ -8,6 +8,7 @@
 #define LIGHTS_H
 
 #include "elev.h"
+#include "typedef.h"
 
 /**
 * @brief Sets the floor indicator lights.

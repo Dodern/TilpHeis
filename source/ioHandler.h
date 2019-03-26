@@ -6,6 +6,7 @@
 #include "buttons.h"
 #include "floorSensors.h"
 #include "lights.h"
+#include "typedef.h"
 
 #ifndef IO_HANDLER_H
 #define IO_HANDLER_H
@@ -20,17 +21,17 @@ void IoHandler__getFloorStatus();
 * @brief Returns vector of buttons pressed.
 * @param[out] buttonMatrix Matrix of buttons pressed, in format:
 *                    {{BUTTON_UP1, BUTTON_DOWN1, BUTTON_COMMAND1},..., {BUTTON_UPN_FLOORS, BUTTON_DOWNN_FLOORS, BUTTON_COMMANDN_FLOORS}}
-* @param[out] output Returns -1 if stop button is pressed.
+* @param[out] output Returns 1 if stop button is pressed, 0 if not.
 */
 int IoHandler__getButtonStatus(int[N_FLOORS][3]);
 
 /*
 * @brief Sets the light specified by the inputs.
-* @param[in] button Type of light.
+* @param[in] light Type of light.
 * @param[in] floor Floor of desired light.
 * @param[in] value Turn light on or off. 0 for off, other values for on.
 */
-void IoHandler__setLight(int, int, int);
+void IoHandler__setLight(type_of_light_t light, int floor, int value);
 
 /*
 * @brief Returns the current floor, -1 means inbetween floors.
