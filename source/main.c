@@ -1,5 +1,7 @@
 #include "elev.h"
 #include <stdio.h>
+#include "motorController.h"
+#include "unitTest.h"
 
 
 int main() {
@@ -9,6 +11,7 @@ int main() {
         return 1;
     }
 
+    /*
     printf("Press STOP button to stop elevator and exit program.\n");
 
     elev_set_motor_direction(DIRN_UP);
@@ -26,7 +29,10 @@ int main() {
             elev_set_motor_direction(DIRN_STOP);
             break;
         }
-    }
+     } */
+
+    UnitTest__motorControllerUnitTest();
+
 
     return 0;
 }
