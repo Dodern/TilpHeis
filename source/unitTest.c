@@ -13,3 +13,7 @@ void UnitTest__lightUnitTest(){
     Lights__setOutsideLights(BUTTON_CALL_UP, 2, 1);
     Lights__setOutsideLights(BUTTON_CALL_DOWN, 1,1);
 }
+
+void UnitTest__floorSensorUnitTest(){
+     printf("etasje %d", FloorSensors__floorStatus());
+}
