@@ -5,12 +5,7 @@
 
 
 int main() {
-    // Initialize hardware
-    if (!elev_init()) {
-        printf("Unable to initialize elevator hardware!\n");
-        return 1;
-    }
-
+    
     /*
     printf("Press STOP button to stop elevator and exit program.\n");
 
@@ -31,7 +26,10 @@ int main() {
         }
      } */
 
+     
+    elev_init();
     UnitTest__motorControllerUnitTest();
+    UnitTest__lightUnitTest();
 
 
     return 0;

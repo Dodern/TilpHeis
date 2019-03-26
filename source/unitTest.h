@@ -13,6 +13,5 @@
 * @brief Unit test of the motorController module.
 */
 void UnitTest__motorControllerUnitTest();
-void UnitTest_lightUnitTest();
 
 #endif

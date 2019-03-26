@@ -5,9 +5,11 @@ void UnitTest__motorControllerUnitTest(){
     MotorController__setMotorStatus(1);
 }
 
-void UnitTest_lightUnitTest(){
+void UnitTest__lightUnitTest(){
     Lights__setFloorLights(3);
-    Lights__setInsideLights(BUTTON_CALL_UP, 2, 1);
+    Lights__setInsideLights(BUTTON_CALL_UP, 1, 1);
+    Lights__setInsideLights(BUTTON_COMMAND, 1, 1);
     Lights__setStopLight(1);
-    Lights__setOutsideLights(BUTTON_CALL_UP, 3, 1);
+    Lights__setOutsideLights(BUTTON_CALL_UP, 2, 1);
+    Lights__setOutsideLights(BUTTON_CALL_DOWN, 1,1);
 }
