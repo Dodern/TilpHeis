@@ -1,4 +1,4 @@
-SOURCES := main.c elev.c io.c ioHandler.c lights.c motor.c motorController.c server.c serverComputations.c unitTest.c
+SOURCES := main.c elev.c io.c ioHandler.c lights.c motor.c motorController.c server.c serverComputations.c unitTest.c floorSensors.c
 
 BUILD_DIR := build
 OBJ := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
