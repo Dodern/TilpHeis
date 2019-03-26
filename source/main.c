@@ -12,7 +12,7 @@ int main() {
     
     
     while(1){
-        UnitTest__buttonsUnitTest();
+        UnitTest__ioHandlerUnitTest();
         
         sleep(1);
     }
