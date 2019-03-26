@@ -14,7 +14,7 @@
 * @brief Private function that gets the floor status from the floor sensor and sets it in the internal variables currentFloor and lastFloor.
 * @param[out] output The floor status. -1 means in between floor, other values reflect the floor it's in.
 */
-int IoHandler__getFloorStatus();
+void IoHandler__getFloorStatus();
 
 /*
 * @brief Returns vector of buttons pressed.
