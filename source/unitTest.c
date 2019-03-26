@@ -15,5 +15,5 @@ void UnitTest__lightUnitTest(){
 }
 
 void UnitTest__floorSensorUnitTest(){
-     printf("etasje %d", FloorSensors__floorStatus());
+     printf("etasje %d \n", FloorSensors__floorStatus());
 }

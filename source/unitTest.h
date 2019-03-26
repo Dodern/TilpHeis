@@ -6,6 +6,7 @@
 #include "motorController.h"
 #include "lights.h"
 #include "floorSensors.h"
+#include <stdio.h>
 
 #ifndef UNIT_TEST_H
 #define UNIT_TEST_H
