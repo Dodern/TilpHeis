@@ -1,5 +1,23 @@
 #include "unitTest.h"
 
+int nsleep(long miliseconds)
+{
+   struct timespec req, rem;
+
+   if(miliseconds > 999)
+   {   
+        req.tv_sec = (int)(miliseconds / 1000);                            /* Must be Non-Negative */
+        req.tv_nsec = (miliseconds - ((long)req.tv_sec * 1000)) * 1000000; /* Must be in range of 0 to 999999999 */
+   }   
+   else
+   {   
+        req.tv_sec = 0;                         /* Must be Non-Negative */
+        req.tv_nsec = miliseconds * 1000000;    /* Must be in range of 0 to 999999999 */
+   }   
+
+   return nanosleep(&req , &rem);
+}
+
 void UnitTest__motorControllerUnitTest(){
     MotorController__setDir(1);
     MotorController__setMotorStatus(1);
@@ -63,4 +81,65 @@ void UnitTest__ioHandlerUnitTest(){
     printf("button_command3 \t = %d \n\n", buttonMatrix[3][2]);
 
     IoHandler__setLight(LIGHT_DOOR, 1, 1);
+}
+
+void UnitTest__buttonLoopUnitTest(){
+    int a = Server__init();
+    if (!a){printf("Error initializing server!\n");}
+
+    
+    
+    while(1){
+
+        printf("Orders before:\n");
+        for (int i = 0; i < N_FLOORS*3; i++){
+            if (orders_[i][0] == 0){
+                printf("Order number %d = up, floor %d", i, orders_[i][1]+1);
+            }
+            if (orders_[i][0] == 1){
+                printf("Order number %d = down, floor %d", i, orders_[i][1]+1);
+            }
+            if (orders_[i][0] == 2){
+                printf("Order number %d = command, floor %d", i, orders_[i][1]+1);
+            }
+            if (orders_[i][0] == -1){
+                printf("Order number %d does not exist", i);
+            }
+            printf("\n");
+        }
+        Server__buttonLoop();
+        
+        printf("Orders after:\n");
+        for (int i = 0; i < N_FLOORS*3; i++){
+            if (orders_[i][0] == 0){
+                printf("Order number %d = up, floor %d", i, orders_[i][1]+1);
+            }
+            if (orders_[i][0] == 1){
+                printf("Order number %d = down, floor %d", i, orders_[i][1]+1);
+            }
+            if (orders_[i][0] == 2){
+                printf("Order number %d = command, floor %d", i, orders_[i][1]+1);
+            }
+            if (orders_[i][0] == -1){
+                printf("Order number %d does not exist", i);
+            }
+            printf("\n");
+        }
+        printf("\n");
+        int ret = nsleep(500);
+        printf("%d\n",ret);
+    }
+
+}
+
+void UnitTest__lightLoopUnitTest(){
+     for (int i = 0; i < N_FLOORS*3; i++){
+        orders_[i][0] = 2;
+        orders_[i][1] = 3;
+    }
+    for (int i = 0; i < N_FLOORS*3; i++){
+        printf("orders button type: %d \n", orders_[i][0]);
+        printf("orders floor: %d \n", orders_[i][1]);
+    }
+    Server__lightLoop();
 }

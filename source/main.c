@@ -3,6 +3,8 @@
 #include "motorController.h"
 #include "unitTest.h"
 #include <unistd.h>
+#include <time.h>
+#include "server.h"
 
 
 int main() {
@@ -12,9 +14,9 @@ int main() {
     
     
     while(1){
-        UnitTest__ioHandlerUnitTest();
-        
-        sleep(1);
+        UnitTest__buttonLoopUnitTest();        
+        int ret = nsleep(500);
+        printf("sleep result %d\n",ret);
     }
 
     return 0;
