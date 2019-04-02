@@ -6,7 +6,6 @@
 #define SERVER_COMPUTATIONS_H
 
 #include "server.h"
-#include "buttonloop.h"
 
 /*
 * @brief Simple for loop that clears the orders_ vector.
@@ -18,4 +17,4 @@ void ServerComputations__clearOrders();
 */
 void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFloor);
 
-#endif SERVER_COMPUTATIONS_H
+#endif

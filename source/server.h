@@ -3,13 +3,23 @@
 * @brief Server module for the elevator project. Handles orders, setting lights and turning on/off motor.
 */
 
+#ifndef SERVER_H
+#define SERVER_H
+
 #include "ioHandler.h"
 #include "motorController.h"
 #include <unistd.h>
 #include "serverComputations.h"
+#include <stdio.h>
 
-#ifndef SERVER_H
-#define SERVER_H
+extern int stopHasOpenedDoor_;
+extern int orders_[N_FLOORS*3][2];
+extern int dir_;
+
+/*
+* @brief Init function for the server module. Initializes variables needed.
+*/
+int Server__init();
 
 /*
 * @brief Loop that handles new button presses, putting new orders into the order list.
