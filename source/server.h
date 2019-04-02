@@ -3,8 +3,10 @@
 * @brief Server module for the elevator project. Handles orders, setting lights and turning on/off motor.
 */
 
-#include "motorController.h"
 #include "ioHandler.h"
+#include "motorController.h"
+#include <unistd.h>
+#include "serverComputations.h"
 
 #ifndef SERVER_H
 #define SERVER_H
