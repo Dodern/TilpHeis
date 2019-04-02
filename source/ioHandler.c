@@ -42,9 +42,11 @@ void IoHandler__setLight(type_of_light_t light, int floor, int value){
 }
 
 int IoHandler__getCurrentFloor(){
+    IoHandler__getFloorStatus();
     return currentFloor_;
 }
 
 int IoHandler__getLastFloor(){
+    IoHandler__getFloorStatus();
     return lastFloor_;
 }

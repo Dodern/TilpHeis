@@ -94,13 +94,13 @@ void UnitTest__buttonLoopUnitTest(){
         printf("Orders before:\n");
         for (int i = 0; i < N_FLOORS*3; i++){
             if (orders_[i][0] == 0){
-                printf("Order number %d = up, floor %d", i, orders_[i][1]);
+                printf("Order number %d = up, floor %d", i, orders_[i][1]+1);
             }
             if (orders_[i][0] == 1){
-                printf("Order number %d = down, floor %d", i, orders_[i][1]);
+                printf("Order number %d = down, floor %d", i, orders_[i][1]+1);
             }
             if (orders_[i][0] == 2){
-                printf("Order number %d = command, floor %d", i, orders_[i][1]);
+                printf("Order number %d = command, floor %d", i, orders_[i][1]+1);
             }
             if (orders_[i][0] == -1){
                 printf("Order number %d does not exist", i);
@@ -112,13 +112,16 @@ void UnitTest__buttonLoopUnitTest(){
         printf("Orders after:\n");
         for (int i = 0; i < N_FLOORS*3; i++){
             if (orders_[i][0] == 0){
-                printf("Order number %d = up, floor %d", i, orders_[i][1]);
+                printf("Order number %d = up, floor %d", i, orders_[i][1]+1);
             }
             if (orders_[i][0] == 1){
-                printf("Order number %d = down, floor %d", i, orders_[i][1]);
+                printf("Order number %d = down, floor %d", i, orders_[i][1]+1);
             }
             if (orders_[i][0] == 2){
-                printf("Order number %d = command, floor %d", i, orders_[i][1]);
+                printf("Order number %d = command, floor %d", i, orders_[i][1]+1);
+            }
+            if (orders_[i][0] == -1){
+                printf("Order number %d does not exist", i);
             }
             printf("\n");
         }

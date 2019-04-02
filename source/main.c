@@ -14,7 +14,7 @@ int main() {
     
     
     while(1){
-        UnitTest__ioHandlerUnitTest();        
+        UnitTest__buttonLoopUnitTest();        
         int ret = nsleep(500);
         printf("sleep result %d\n",ret);
     }

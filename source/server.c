@@ -13,7 +13,6 @@ void Server__buttonLoop(){
     int buttonMatrix[N_FLOORS][3]; 
     // Get buttonmatrix and possibly handle stop button press.
     while ((IoHandler__getButtonStatus(buttonMatrix))){
-        printf("Stop button pressed!\n");
         IoHandler__setLight(LIGHT_STOP, 0, 1);
         MotorController__setMotorStatus(0);
         ServerComputations__clearOrders(); 
