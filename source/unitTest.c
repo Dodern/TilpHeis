@@ -131,3 +131,15 @@ void UnitTest__buttonLoopUnitTest(){
     }
 
 }
+
+void UnitTest__lightLoopUnitTest(){
+     for (int i = 0; i < N_FLOORS*3; i++){
+        orders_[i][0] = 2;
+        orders_[i][1] = 3;
+    }
+    for (int i = 0; i < N_FLOORS*3; i++){
+        printf("orders button type: %d \n", orders_[i][0]);
+        printf("orders floor: %d \n", orders_[i][1]);
+    }
+    Server__lightLoop();
+}

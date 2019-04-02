@@ -52,4 +52,9 @@ void UnitTest__ioHandlerUnitTest();
 */
 void UnitTest__buttonLoopUnitTest();
 
+/*
+* @brief Unit test of the lighLoop function in the server module.
+*/
+void UnitTest__lightLoopUnitTest();
+
 #endif
