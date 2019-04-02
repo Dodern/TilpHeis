@@ -20,7 +20,7 @@ int nsleep(long miliseconds)
 
 void UnitTest__motorControllerUnitTest(){
     MotorController__setDir(1);
-    MotorController__setMotorStatus(1);
+    //MotorController__setMotorStatus(1);
 }
 
 void UnitTest__lightUnitTest(){

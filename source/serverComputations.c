@@ -53,13 +53,84 @@ void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFlo
         }
 
     }
-    printf("Current floor = %d\n", currentFloor);
-    for (int i = 0; i < N_FLOORS*3; i ++){
-        if (orders_[i][1] == currentFloor){
-            for (int j = i; j < N_FLOORS*3-1; j++){
-                orders_[j][0] = orders_[j+1][0];
-                orders_[j][1] = orders_[j+1][1];
+    //printf("Current floor = %d\n", currentFloor);
+    printf("doorOpen = %d!\n", doorOpen_);
+    if (doorOpen_){
+        doorOpen_ = 0;
+        printf("Door open, so trying to clear orders!\n");
+        if (orders_[N_FLOORS*3-1][1] == currentFloor){
+            orders_[N_FLOORS*3-1][0] = -1;
+            orders_[N_FLOORS*3-1][1] = -1;
+        }
+        for (int i = N_FLOORS*3-2; i >= 0; i--){
+            if (orders_[i][1] == currentFloor){
+                for (int j = i; j < N_FLOORS*3-1; j++){
+                    orders_[j][0] = orders_[j+1][0];
+                    orders_[j][1] = orders_[j+1][1];
+                }
             }
         }
     }
+}
+
+void ServerComputations__setDesired(){
+    // check whether currently serving, if not get first order
+    int currentFloor = IoHandler__getCurrentFloor();
+    printf("desired = %d\n", desired_);
+    if ((desiredDir_ == 0) &&(orders_[0][1] != -1) ){
+        desired_ = orders_[0][1];
+        printf("desired = %d\n", desired_);
+        printf("current floor = %d\n", currentFloor);
+        if ((desired_ - currentFloor) > 0){
+            desiredDir_ = 1;
+        } 
+        else if ((desired_ - currentFloor) < 0){
+            desiredDir_ = -1;
+        }
+    }
+    printf("desiredDir_ = %d\n", desiredDir_);
+    MotorController__setDir(desiredDir_);
+}
+
+
+
+int ServerComputations__shouldWeStop(){
+    int currentFloor = IoHandler__getCurrentFloor();
+    if (desired_ == currentFloor){
+        return 1;
+    }
+    else if(currentFloor != -1){
+        for (int i = 0; i < N_FLOORS*3; i++){
+            if (orders_[i][1] == currentFloor){
+                if (orders_[i][0] == 3){
+                    return 1;
+                }
+                else if (((orders_[i][0] == 1) && (desiredDir_ = -1 )) || ((orders_[i][0] == 0) && (desiredDir_ = 1))){
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;    
+}
+
+
+
+void ServerComputations__stopAtFloor(){
+    MotorController__setDir(0);
+    if (IoHandler__getCurrentFloor() == desired_){
+        //desired_ = 0;
+        desiredDir_ = 0;
+    }
+    IoHandler__setLight(LIGHT_DOOR, 0, 1);
+    doorOpen_ = 1;
+    //int waitPeriodInMillis = 3000;
+    //clock_t startTime = clock();
+    //while (clock() < startTime + waitPeriodInMillis){
+    sleep(1);
+    Server__buttonLoop();
+    sleep(1);
+    Server__buttonLoop();
+    sleep(1);
+    IoHandler__setLight(LIGHT_DOOR, 0, 0);
 }

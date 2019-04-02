@@ -1,12 +1,25 @@
 #include "server.h"
 
-int dir_ = 0;
+int desiredDir_ = 0;
 int stopHasOpenedDoor_ = 0;
 int orders_[N_FLOORS*3][2];
-static int doorOpen_ = 0;
+int doorOpen_ = 0;
+int desired_ = -1;
+int hasStoppedAtFloor_ = 0;
 
 int Server__init(){
     ServerComputations__clearOrders();
+    int currentFloor = IoHandler__getCurrentFloor();
+    int lastFloor = IoHandler__getLastFloor();
+    if (currentFloor != lastFloor ){
+        printf("Not in a floor, so driving down!\n");
+        MotorController__setDir(-1);
+        while (currentFloor != lastFloor ){
+            currentFloor = IoHandler__getCurrentFloor();
+            lastFloor = IoHandler__getLastFloor();
+        }
+        MotorController__setDir(0);
+    }
     return 1;
 }
 
@@ -15,8 +28,9 @@ void Server__buttonLoop(){
     // Get buttonmatrix and possibly handle stop button press.
     while ((IoHandler__getButtonStatus(buttonMatrix))){
         IoHandler__setLight(LIGHT_STOP, 0, 1);
-        MotorController__setMotorStatus(0);
+        MotorController__setDir(0);
         ServerComputations__clearOrders(); 
+        desired_ = -1;
         if (IoHandler__getLastFloor() == IoHandler__getCurrentFloor()){
             IoHandler__setLight(LIGHT_DOOR, 0, 1);
             stopHasOpenedDoor_ = 1;
@@ -63,5 +77,12 @@ void Server__lightLoop(){
 
 
 void Server__motorLoop(){
-    
+    ServerComputations__setDesired();
+    if(ServerComputations__shouldWeStop() && !hasStoppedAtFloor_){
+        hasStoppedAtFloor_ = 1;
+        ServerComputations__stopAtFloor();
+    }
+    else if(IoHandler__getCurrentFloor() == -1){
+        hasStoppedAtFloor_ = 0;
+    }
 }
