@@ -28,25 +28,27 @@ void ServerComputations__clearOrders(){
 void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFloor){
     // For each pressed button in the button matrix, go through orders_ looking for the same, if not add to orders_
     for (int r = 0; r < N_FLOORS; r++){
-        for (int c = 0; c < 3; c ++){
-            if (buttonMatrix[r][c]){
-                if (r == 0){
-                }
-                int hasBeenSet = 0;
-                int buttonPressHandled = 0;
-                // if true then the button has been pressed, so go through orders_ looking for it.
-                for (int i = 0; i < N_FLOORS*3; i++){
-                    if (orders_[i][0] == c && orders_[i][1] == r){
-                        hasBeenSet = 1;
-                        if (r == 0){
-                        }
+        if (!(currentFloor == r)){
+            for (int c = 0; c < 3; c ++){
+                if (buttonMatrix[r][c]){
+                    if (r == 0){
                     }
-                    else if(orders_[i][0] == -1 && !hasBeenSet && !buttonPressHandled){
-                        if (r == 0){
-                        }       
-                        orders_[i][0] = c;
-                        orders_[i][1] = r;
-                        buttonPressHandled = 1;
+                    int hasBeenSet = 0;
+                    int buttonPressHandled = 0;
+                    // if true then the button has been pressed, so go through orders_ looking for it.
+                    for (int i = 0; i < N_FLOORS*3; i++){
+                        if (orders_[i][0] == c && orders_[i][1] == r){
+                            hasBeenSet = 1;
+                            if (r == 0){
+                            }
+                        }
+                        else if(orders_[i][0] == -1 && !hasBeenSet && !buttonPressHandled){
+                            if (r == 0){
+                            }       
+                            orders_[i][0] = c;
+                            orders_[i][1] = r;
+                            buttonPressHandled = 1;
+                        }
                     }
                 }
             }
@@ -88,6 +90,22 @@ void ServerComputations__setDesired(){
             desiredDir_ = -1;
         }
     }
+    //if (currentFloor == 0){
+    //    if (orders_[0][0] != -1){
+    //        desiredDir_ = 1;
+    //    }
+    //    else{
+    //        desiredDir_ = 0;
+    //    }
+    //}
+    //else if(currentFloor == 3){
+    //    if (orders_[0][0] != -1){
+    //        desiredDir_ = -1;
+    //    }
+    //    else{
+    //        desiredDir_ = 0;
+    //    }
+    //}
     printf("desiredDir_ = %d\n", desiredDir_);
     MotorController__setDir(desiredDir_);
 }
@@ -102,7 +120,8 @@ int ServerComputations__shouldWeStop(){
     else if(currentFloor != -1){
         for (int i = 0; i < N_FLOORS*3; i++){
             if (orders_[i][1] == currentFloor){
-                if (orders_[i][0] == 3){
+                // check if there is an internal order in the floor, if so stop.
+                if (orders_[i][0] == 2){
                     return 1;
                 }
                 else if (((orders_[i][0] == 1) && (desiredDir_ = -1 )) || ((orders_[i][0] == 0) && (desiredDir_ = 1))){
@@ -124,13 +143,15 @@ void ServerComputations__stopAtFloor(){
     }
     IoHandler__setLight(LIGHT_DOOR, 0, 1);
     doorOpen_ = 1;
-    //int waitPeriodInMillis = 3000;
+    //int waitPeriodInMillis = 90000;
     //clock_t startTime = clock();
-    //while (clock() < startTime + waitPeriodInMillis){
-    sleep(1);
-    Server__buttonLoop();
-    sleep(1);
-    Server__buttonLoop();
-    sleep(1);
+    for (int i = 0; i < 1000; i++){
+        usleep(3000);
+        Server__buttonLoop();
+        Server__lightLoop();    
+    }
+    //sleep(1);
+    //Server__buttonLoop();
+    //sleep(1);
     IoHandler__setLight(LIGHT_DOOR, 0, 0);
 }

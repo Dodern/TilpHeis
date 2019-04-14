@@ -8,6 +8,25 @@
 
 
 int main() {
+    for (int i = 0; i < N_FLOORS*3; i++){
+        orders_[i][0] = -1;
+        orders_[i][1] = -1;
+    }
+    for (int i = 0; i < N_FLOORS*3; i++){
+            if (orders_[i][0] == 0){
+                printf("Order number %d = up, floor %d", i, orders_[i][1]+1);
+            }
+            if (orders_[i][0] == 1){
+                printf("Order number %d = down, floor %d", i, orders_[i][1]+1);
+            }
+            if (orders_[i][0] == 2){
+                printf("Order number %d = command, floor %d", i, orders_[i][1]+1);
+            }
+            if (orders_[i][0] == -1){
+                printf("Order number %d does not exist", i);
+            }
+            printf("\n");
+    }
     int a = elev_init();
     if (!a){printf("Error initializing elev!\n");}
     else {printf("io initialized!\n");}
