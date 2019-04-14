@@ -29,22 +29,16 @@ void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFlo
     // For each pressed button in the button matrix, go through orders_ looking for the same, if not add to orders_
     for (int r = 0; r < N_FLOORS; r++){
         if (!(currentFloor == r)){
-            for (int c = 0; c < 3; c ++){
+            for (int c = 3; c < 0; c --){
                 if (buttonMatrix[r][c]){
-                    if (r == 0){
-                    }
                     int hasBeenSet = 0;
                     int buttonPressHandled = 0;
                     // if true then the button has been pressed, so go through orders_ looking for it.
                     for (int i = 0; i < N_FLOORS*3; i++){
                         if (orders_[i][0] == c && orders_[i][1] == r){
                             hasBeenSet = 1;
-                            if (r == 0){
-                            }
                         }
                         else if(orders_[i][0] == -1 && !hasBeenSet && !buttonPressHandled){
-                            if (r == 0){
-                            }       
                             orders_[i][0] = c;
                             orders_[i][1] = r;
                             buttonPressHandled = 1;
@@ -56,10 +50,10 @@ void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFlo
 
     }
     //printf("Current floor = %d\n", currentFloor);
-    printf("doorOpen = %d!\n", doorOpen_);
+    //printf("doorOpen = %d!\n", doorOpen_);
     if (doorOpen_){
         doorOpen_ = 0;
-        printf("Door open, so trying to clear orders!\n");
+        //printf("Door open, so trying to clear orders!\n");
         if (orders_[N_FLOORS*3-1][1] == currentFloor){
             orders_[N_FLOORS*3-1][0] = -1;
             orders_[N_FLOORS*3-1][1] = -1;
@@ -78,8 +72,8 @@ void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFlo
 void ServerComputations__setDesired(){
     // check whether currently serving, if not get first order
     int currentFloor = IoHandler__getCurrentFloor();
-    printf("desired = %d\n", desired_);
-    if ((desiredDir_ == 0) &&(orders_[0][1] != -1) ){
+    //printf("desired = %d\n", desired_);
+    if ((desiredDir_ == 0) &&(orders_[0][0] != -1) ){
         desired_ = orders_[0][1];
         printf("desired = %d\n", desired_);
         printf("current floor = %d\n", currentFloor);
@@ -106,7 +100,7 @@ void ServerComputations__setDesired(){
     //        desiredDir_ = 0;
     //    }
     //}
-    printf("desiredDir_ = %d\n", desiredDir_);
+    //printf("desiredDir_ = %d\n", desiredDir_);
     MotorController__setDir(desiredDir_);
 }
 
@@ -129,7 +123,7 @@ int ServerComputations__shouldWeStop(){
                 }
             }
         }
-    }
+    } 
     return 0;    
 }
 

@@ -87,12 +87,13 @@ void Server__motorLoop(){
     }
     else if ((desiredDir_ == -1) && IoHandler__getCurrentFloor() == 0){
         ServerComputations__stopAtFloor();
-        if (orders_[0][0] != -1){
-            ServerComputations__setDesired();
-        }
-        else{
-            desiredDir_ = 0;
-        }
+        //if (orders_[0][0] != -1){
+        //    ServerComputations__setDesired();
+        //}
+        //else{
+        //    desiredDir_ = 0;
+        //}
+        desiredDir_ = -desiredDir_;
     }
     else if ((desiredDir_ == 1) && IoHandler__getCurrentFloor() == 3){
         ServerComputations__stopAtFloor();
