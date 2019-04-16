@@ -45,6 +45,7 @@ void Server_buttonLoop(){
         IoHandler_setLight(LIGHT_STOP, 0, 0);
         IoHandler_setLight(LIGHT_DOOR, 0, 0);
         stopHasOpenedDoor_ = 0;
+        Server_init();
     }
 
     // use the button matrix and current floor to add and clear orders from orders_
