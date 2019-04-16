@@ -41,11 +41,10 @@ void Server_buttonLoop(){
     }
     // If stop was pressed, sleep for 3 seconds and set the appropiate lights.
     if (stopHasOpenedDoor_){
-        sleep(3);
         IoHandler_setLight(LIGHT_STOP, 0, 0);
+        sleep(3);
         IoHandler_setLight(LIGHT_DOOR, 0, 0);
         stopHasOpenedDoor_ = 0;
-        Server_init();
     }
 
     // use the button matrix and current floor to add and clear orders from orders_
