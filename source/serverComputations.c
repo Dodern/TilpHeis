@@ -113,12 +113,13 @@ int ServerComputations__shouldWeStop(){
     }
     else if(currentFloor != -1){
         for (int i = 0; i < N_FLOORS*3; i++){
-            if (orders_[i][1] == currentFloor){
+            if (orders_[i][0] == currentFloor){
                 // check if there is an internal order in the floor, if so stop.
-                if (orders_[i][0] == 2){
+                if (orders_[i][1] == 2){
                     return 1;
                 }
-                else if (((orders_[i][0] == 1) && (desiredDir_ = -1 )) || ((orders_[i][0] == 0) && (desiredDir_ = 1))){
+                // check if there are external orders going the same way as we are, if so stop.
+                else if (((orders_[i][1] == 1) && (desiredDir_ = -1 )) || ((orders_[i][1] == 0) && (desiredDir_ = 1))){
                     return 1;
                 }
             }
