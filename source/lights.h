@@ -14,7 +14,7 @@
 * @brief Sets the floor indicator lights.
 * @param[in] floor The current floor of the elevator
 */
-void Lights__setCurrentFloorLights(int floor);
+void Lights_setCurrentFloorLights(int floor);
 
 /**
 * @brief Sets the lights inside the elevator. 
@@ -22,18 +22,18 @@ void Lights__setCurrentFloorLights(int floor);
 * @param[in] floor Desired floor.
 * @param[in] value Turn light on or off. 0 for off, other values for on.
 */
-void Lights__setDesiredFloorLights(elev_button_type_t button, int floor, int value);
+void Lights_setDesiredFloorLights(elev_button_type_t button, int floor, int value);
 
 /**
 * @brief Sets the door indicator light.
 * @param[in] value Turn light on or off. 0 for off, other values for on.
 */
-void Lights__setDoorLight(int value);
+void Lights_setDoorLight(int value);
 
 /**
 * @brief Sets the stop indicator light.
 * @param[in] value Turn light on or off. 0 for off, other values for on.
 */
-void Lights__setStopLight(int value);
+void Lights_setStopLight(int value);
 
 #endif

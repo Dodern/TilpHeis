@@ -1,8 +1,8 @@
 #include "motorController.h"
 
-void MotorController__setDir(int dir){
+void MotorController_setDir(int dir){
     // Set the direction of the motor.
-    Motor__setDir(dir);
+    Motor_setDir(dir);
     // Tell it to run.
-    Motor__startAndStopMotor(1);
+    Motor_startAndStopMotor(1);
 }

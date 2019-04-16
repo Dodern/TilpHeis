@@ -11,6 +11,6 @@
 /**
 * @brief Checks the status of the floor sensors
 */
-int FloorSensors__floorStatus();
+int FloorSensors_floorStatus();
 
 #endif

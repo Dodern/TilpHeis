@@ -1,6 +1,6 @@
 #include "buttons.h"
 
-void Buttons__readButtons(int buttonMatrix[N_FLOORS][3]){
+void Buttons_readButtons(int buttonMatrix[N_FLOORS][3]){
     // Iterate through the floors and through the different button types, 
     // where the button types are int representing the following:
     // BUTTON_CALL_UP = 0,
@@ -17,6 +17,6 @@ void Buttons__readButtons(int buttonMatrix[N_FLOORS][3]){
     } // for 
 }
 
-int Buttons__readStopButton(){
+int Buttons_readStopButton(){
     return elev_get_stop_signal();
 }

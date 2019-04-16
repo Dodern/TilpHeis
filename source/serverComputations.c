@@ -1,6 +1,6 @@
 #include "serverComputations.h"
 
-void ServerComputations__clearOrders(){
+void ServerComputations_clearOrders(){
     // Set all orders to be -1.
     for (int i = 0; i < N_FLOORS*3; i++){
         orders_[i][0] = -1;
@@ -8,7 +8,7 @@ void ServerComputations__clearOrders(){
     }
 }
 
-void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFloor){
+void ServerComputations_setOrders(int buttonMatrix[N_FLOORS][3], int currentFloor){
     // For each pressed button in the button matrix, go through orders_ looking for the same, if not add to orders_
     for (int r = 0; r < N_FLOORS; r++){
         if (!(currentFloor == r)){
@@ -52,9 +52,9 @@ void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFlo
     }
 }
 
-void ServerComputations__setDesired(){
+void ServerComputations_setDesired(){
     // check whether currently serving, if not get first order.
-    int currentFloor = IoHandler__getCurrentFloor();
+    int currentFloor = IoHandler_getCurrentFloor();
     if ((desiredDir_ == 0) &&(orders_[0][0] != -1) ){
         desired_ = orders_[0][1]; // desired floor.
         // Set desiredDir by taking the sign of desired - currentfloor.
@@ -69,13 +69,13 @@ void ServerComputations__setDesired(){
         }
     }
     // Tell the motor to take the elevator in the desired direction.
-    MotorController__setDir(desiredDir_);
+    MotorController_setDir(desiredDir_);
 }
 
 
 
-int ServerComputations__shouldWeStop(){
-    int currentFloor = IoHandler__getCurrentFloor();
+int ServerComputations_shouldWeStop(){
+    int currentFloor = IoHandler_getCurrentFloor();
     if (desired_ == currentFloor){
         return 1;
     }
@@ -101,21 +101,21 @@ int ServerComputations__shouldWeStop(){
 
 
 
-void ServerComputations__stopAtFloor(){
+void ServerComputations_stopAtFloor(){
     // Stop the elevator
-    MotorController__setDir(0);
-    if (IoHandler__getCurrentFloor() == desired_){
+    MotorController_setDir(0);
+    if (IoHandler_getCurrentFloor() == desired_){
         desiredDir_ = 0;
     }
     // turn on door light
-    IoHandler__setLight(LIGHT_DOOR, 0, 1);
+    IoHandler_setLight(LIGHT_DOOR, 0, 1);
     doorOpen_ = 1; // bool used by other parts of system
     // Microsleep for 3 sec, so we can add orders and lights while sleeping.
     for (int i = 0; i < 1000; i++){
         usleep(3000);
-        Server__buttonLoop();
-        Server__lightLoop();    
+        Server_buttonLoop();
+        Server_lightLoop();    
     }
     // turn of door light
-    IoHandler__setLight(LIGHT_DOOR, 0, 0);
+    IoHandler_setLight(LIGHT_DOOR, 0, 0);
 }

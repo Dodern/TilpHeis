@@ -22,22 +22,22 @@ extern int lastDir_;
 /*
 * @brief Init function for the server module. Initializes variables needed.
 */
-int Server__init();
+int Server_init();
 
 /*
 * @brief Loop that handles new button presses, putting new orders into the order list.
 */
-void Server__buttonLoop();
+void Server_buttonLoop();
 
 /*
 * @brief Loop that handles setting the lights at appropriate times.
 */
-void Server__lightLoop();
+void Server_lightLoop();
 
 /*
 * @brief Loop that handles setting the motor direction and turning on/off the motor too match our desired floor and stop button presses. 
 * Also keeps the door open for 3 seconds when stopping at a floor.
 */
-void Server__motorLoop();
+void Server_motorLoop();
 
 #endif

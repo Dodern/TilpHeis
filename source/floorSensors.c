@@ -1,5 +1,5 @@
 #include "floorSensors.h"
 
-int FloorSensors__floorStatus(){
+int FloorSensors_floorStatus(){
     return elev_get_floor_sensor_signal();
 }

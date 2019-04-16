@@ -24,37 +24,37 @@ int nsleep(long miliseconds);
 /*
 * @brief Unit test of the motorController module.
 */
-void UnitTest__motorControllerUnitTest();
+void UnitTest_motorControllerUnitTest();
 
 /*
 * @brief Unit test of the light module.
 */
-void UnitTest__lightUnitTest();
+void UnitTest_lightUnitTest();
 
 
 /*
 * @brief Unit test of the floorSensor module.
 */
-void UnitTest__floorSensorUnitTest();
+void UnitTest_floorSensorUnitTest();
 
 /*
 * @brief Unit test of the buttons module
 */
-void UnitTest__buttonsUnitTest();
+void UnitTest_buttonsUnitTest();
 
 /*
 * @brief Unit test of the ioHandler module.
 */ 
-void UnitTest__ioHandlerUnitTest();
+void UnitTest_ioHandlerUnitTest();
 
 /*
 * @brief Unit test of buttonLoop in the server module.
 */
-void UnitTest__buttonLoopUnitTest();
+void UnitTest_buttonLoopUnitTest();
 
 /*
 * @brief Unit test of the lighLoop function in the server module.
 */
-void UnitTest__lightLoopUnitTest();
+void UnitTest_lightLoopUnitTest();
 
 #endif

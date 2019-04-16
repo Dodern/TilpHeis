@@ -18,32 +18,32 @@ int nsleep(long miliseconds)
    return nanosleep(&req , &rem);
 }
 
-void UnitTest__motorControllerUnitTest(){
-    MotorController__setDir(1);
+void UnitTest_motorControllerUnitTest(){
+    MotorController_setDir(1);
     //MotorController__setMotorStatus(1);
 }
 
-void UnitTest__lightUnitTest(){
-    Lights__setCurrentFloorLights(3);
-    Lights__setDesiredFloorLights(BUTTON_CALL_UP, 1, 1);
-    Lights__setDesiredFloorLights(BUTTON_COMMAND, 1, 1);
-    Lights__setStopLight(1);
-    Lights__setDesiredFloorLights(BUTTON_CALL_UP, 2, 1);
-    Lights__setDesiredFloorLights(BUTTON_CALL_DOWN, 1,1);
+void UnitTest_lightUnitTest(){
+    Lights_setCurrentFloorLights(3);
+    Lights_setDesiredFloorLights(BUTTON_CALL_UP, 1, 1);
+    Lights_setDesiredFloorLights(BUTTON_COMMAND, 1, 1);
+    Lights_setStopLight(1);
+    Lights_setDesiredFloorLights(BUTTON_CALL_UP, 2, 1);
+    Lights_setDesiredFloorLights(BUTTON_CALL_DOWN, 1,1);
 }
 
-void UnitTest__floorSensorUnitTest(){
-     printf("etasje %d \n", FloorSensors__floorStatus());
+void UnitTest_floorSensorUnitTest(){
+     printf("etasje %d \n", FloorSensors_floorStatus());
 }
 
-void UnitTest__buttonsUnitTest(){
+void UnitTest_buttonsUnitTest(){
     int buttonMatrix[N_FLOORS][3];
     for(int floor = 0; floor < N_FLOORS; floor++){
         for (int buttonType = 0; buttonType < 3; buttonType++){
             buttonMatrix[floor][buttonType] = 0;
         }
     }
-    Buttons__readButtons(buttonMatrix);
+    Buttons_readButtons(buttonMatrix);
     
     printf("button_up0 \t = %d \n",        buttonMatrix[0][0]);
     printf("button_down0 \t = %d \n",      buttonMatrix[0][1]);
@@ -59,12 +59,12 @@ void UnitTest__buttonsUnitTest(){
     printf("button_command3 \t = %d \n\n", buttonMatrix[3][2]);
 }
 
-void UnitTest__ioHandlerUnitTest(){
-    IoHandler__getFloorStatus();
-    printf("Last floor = %d \n", IoHandler__getLastFloor());
-    printf("Current floor = %d \n", IoHandler__getCurrentFloor());
+void UnitTest_ioHandlerUnitTest(){
+    IoHandler_getFloorStatus();
+    printf("Last floor = %d \n", IoHandler_getLastFloor());
+    printf("Current floor = %d \n", IoHandler_getCurrentFloor());
     int buttonMatrix[N_FLOORS][3];
-    if (IoHandler__getButtonStatus(buttonMatrix)){
+    if (IoHandler_getButtonStatus(buttonMatrix)){
         printf("Stop button pressed!\n");
     }
     printf("button_up0 \t = %d \n",        buttonMatrix[0][0]);
@@ -80,11 +80,11 @@ void UnitTest__ioHandlerUnitTest(){
     printf("button_down3 \t = %d \n",      buttonMatrix[3][1]);
     printf("button_command3 \t = %d \n\n", buttonMatrix[3][2]);
 
-    IoHandler__setLight(LIGHT_DOOR, 1, 1);
+    IoHandler_setLight(LIGHT_DOOR, 1, 1);
 }
 
-void UnitTest__buttonLoopUnitTest(){
-    int a = Server__init();
+void UnitTest_buttonLoopUnitTest(){
+    int a = Server_init();
     if (!a){printf("Error initializing server!\n");}
 
     
@@ -107,7 +107,7 @@ void UnitTest__buttonLoopUnitTest(){
             }
             printf("\n");
         }
-        Server__buttonLoop();
+        Server_buttonLoop();
         
         printf("Orders after:\n");
         for (int i = 0; i < N_FLOORS*3; i++){
@@ -132,7 +132,7 @@ void UnitTest__buttonLoopUnitTest(){
 
 }
 
-void UnitTest__lightLoopUnitTest(){
+void UnitTest_lightLoopUnitTest(){
      for (int i = 0; i < N_FLOORS*3; i++){
         orders_[i][0] = 2;
         orders_[i][1] = 3;
@@ -141,5 +141,5 @@ void UnitTest__lightLoopUnitTest(){
         printf("orders button type: %d \n", orders_[i][0]);
         printf("orders floor: %d \n", orders_[i][1]);
     }
-    Server__lightLoop();
+    Server_lightLoop();
 }

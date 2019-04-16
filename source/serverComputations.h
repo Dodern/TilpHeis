@@ -14,27 +14,27 @@
 /*
 * @brief Simple for loop that clears the orders_ vector.
 */
-void ServerComputations__clearOrders();
+void ServerComputations_clearOrders();
 
 /*
 * @brief Simple for loop that sets orders in orders_ vector by using buttons pressed and current floor.
 */
-void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFloor);
+void ServerComputations_setOrders(int buttonMatrix[N_FLOORS][3], int currentFloor);
 
 /*
 * @brief Sets the desired floor for the elevator and starts going towards it.
 */
-void ServerComputations__setDesired();
+void ServerComputations_setDesired();
 
 /*
 * @brief Finds out if the elevator has to stop at a certain floor when passing it.
 */
-int ServerComputations__shouldWeStop();
+int ServerComputations_shouldWeStop();
 
 /*
 * @brief Stops the elevator at the specified floor.
 */
-void ServerComputations__stopAtFloor();
+void ServerComputations_stopAtFloor();
 
 
 #endif

@@ -20,15 +20,15 @@ int main() {
     else {printf("io initialized!\n");}
     
     // initialize server
-    a = Server__init();
+    a = Server_init();
     if (!a){printf("Error initializing server!\n");}
     else {printf("Server intialized!\n");}
 
     // Endless loop.
     while(1){
-        Server__buttonLoop();
-        Server__lightLoop();
-        Server__motorLoop();
+        Server_buttonLoop();
+        Server_lightLoop();
+        Server_motorLoop();
     }
     return 0;
 }

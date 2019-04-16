@@ -14,12 +14,12 @@
 *                          Has the following format: 
 *                          {{BUTTON_UP1, BUTTON_DOWN1, BUTTON_COMMAND1};...;{BUTTON_UPN_FLOORS, BUTTON_DOWNN_FLOORS, BUTTON_COMMANDN_FLOORS}}
 */
-void Buttons__readButtons(int[N_FLOORS][3]);
+void Buttons_readButtons(int[N_FLOORS][3]);
 
 /*
 * @brief Returns true if stop button is pressed.
 * @param[out] bool representing whether the stop button is pressed.
 */
-int Buttons__readStopButton();
+int Buttons_readStopButton();
 
 #endif
