@@ -34,7 +34,6 @@ void Server_buttonLoop(){
         IoHandler_setLight(LIGHT_STOP, 0, 1);
         MotorController_setDir(0);
         ServerComputations_clearOrders(); 
-        desired_ = -1;
         if (IoHandler_getLastFloor() == IoHandler_getCurrentFloor()){
             IoHandler_setLight(LIGHT_DOOR, 0, 1);
         }
@@ -43,6 +42,7 @@ void Server_buttonLoop(){
     // If stop was pressed, sleep for 3 seconds and set the appropiate lights.
     if (stopHasOpenedDoor_){
         sleep(3);
+        IoHandler_setLight(LIGHT_STOP, 0, 0);
         IoHandler_setLight(LIGHT_DOOR, 0, 0);
         stopHasOpenedDoor_ = 0;
     }
@@ -77,10 +77,6 @@ void Server_lightLoop(){
                 IoHandler_setLight(j, i, lightMatrix[i][j]);
             }
         }
-    }
-    // Also set the door light if door is open.
-    if (doorOpen_){
-        IoHandler_setLight(LIGHT_DOOR, 0, 1);
     }
 }
 

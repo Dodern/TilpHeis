@@ -6,6 +6,7 @@ void ServerComputations_clearOrders(){
         orders_[i][0] = -1;
         orders_[i][1] = -1;
     }
+    desiredDir_ = 0;
 }
 
 void ServerComputations_setOrders(int buttonMatrix[N_FLOORS][3], int currentFloor){
@@ -57,7 +58,8 @@ void ServerComputations_setDesired(){
     int currentFloor = IoHandler_getCurrentFloor();
     if ((desiredDir_ == 0) &&(orders_[0][0] != -1) ){
         desired_ = orders_[0][1]; // desired floor.
-        // Set desiredDir by taking the sign of desired - currentfloor.
+        // Set desiredDir by taking the sign of desired - currentfloor. 
+        // Unless stop button has been pressed, in which case desired = -1;
         if ((desired_ - currentFloor) > 0){
             desiredDir_ = 1;
         } 
