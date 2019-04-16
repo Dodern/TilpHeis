@@ -20,4 +20,7 @@ void Motor__startAndStopMotor(int motorStatus){
 */
 void Motor__setDir(int dir){
     dir_ = dir;
+    if (!(dir == 0)){
+        lastDir_ = dir;
+    }
 }

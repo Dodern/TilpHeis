@@ -17,6 +17,7 @@ extern int orders_[N_FLOORS*3][2];
 extern int desiredDir_;
 extern int desired_;
 extern int doorOpen_;
+extern int lastDir_;
 
 /*
 * @brief Init function for the server module. Initializes variables needed.

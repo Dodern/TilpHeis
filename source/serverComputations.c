@@ -39,8 +39,8 @@ void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFlo
                             hasBeenSet = 1;
                         }
                         else if(orders_[i][0] == -1 && !hasBeenSet && !buttonPressHandled){
-                            orders_[i][0] = c;
-                            orders_[i][1] = r;
+                            orders_[i][0] = c; // button type
+                            orders_[i][1] = r; // floor
                             buttonPressHandled = 1;
                         }
                     }
@@ -74,7 +74,7 @@ void ServerComputations__setDesired(){
     int currentFloor = IoHandler__getCurrentFloor();
     //printf("desired = %d\n", desired_);
     if ((desiredDir_ == 0) &&(orders_[0][0] != -1) ){
-        desired_ = orders_[0][1];
+        desired_ = orders_[0][1]; // desired floor
         printf("desired = %d\n", desired_);
         printf("current floor = %d\n", currentFloor);
         if ((desired_ - currentFloor) > 0){
@@ -82,6 +82,9 @@ void ServerComputations__setDesired(){
         } 
         else if ((desired_ - currentFloor) < 0){
             desiredDir_ = -1;
+        }
+        else {
+            desiredDir_ = 0;
         }
     }
     //if (currentFloor == 0){
@@ -113,13 +116,17 @@ int ServerComputations__shouldWeStop(){
     }
     else if(currentFloor != -1){
         for (int i = 0; i < N_FLOORS*3; i++){
-            if (orders_[i][0] == currentFloor){
+            if (orders_[i][1] == currentFloor){
                 // check if there is an internal order in the floor, if so stop.
-                if (orders_[i][1] == 2){
+                if (orders_[i][0] == 2){
                     return 1;
                 }
                 // check if there are external orders going the same way as we are, if so stop.
-                else if (((orders_[i][1] == 1) && (desiredDir_ = -1 )) || ((orders_[i][1] == 0) && (desiredDir_ = 1))){
+                //if (lastDir_ ==)
+                else if (((orders_[i][0] == 1) && (lastDir_ == -1 ))){
+                    return 1;
+                }
+                else if  ((orders_[i][0] == 0) && (lastDir_ == 1)){
                     return 1;
                 }
             }

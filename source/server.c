@@ -6,6 +6,7 @@ int orders_[N_FLOORS*3][2];
 int doorOpen_ = 0;
 int desired_ = -1;
 int hasStoppedAtFloor_ = 0;
+int lastDir_ = 0;
 
 int Server__init(){
     ServerComputations__clearOrders();
