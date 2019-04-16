@@ -1,28 +1,11 @@
 #include "serverComputations.h"
 
 void ServerComputations__clearOrders(){
+    // Set all orders to be -1.
     for (int i = 0; i < N_FLOORS*3; i++){
         orders_[i][0] = -1;
         orders_[i][1] = -1;
     }
-    /*
-    printf("Orders after init:\n");
-    for (int i = 0; i < N_FLOORS*3; i++){
-        if (orders_[i][0] == 0){
-            printf("Order number %d = up, floor %d", i, orders_[i][1]+1);
-        }
-        if (orders_[i][0] == 1){
-            printf("Order number %d = down, floor %d", i, orders_[i][1]+1);
-        }
-        if (orders_[i][0] == 2){
-            printf("Order number %d = command, floor %d", i, orders_[i][1]+1);
-        }
-        if (orders_[i][0] == -1){
-            printf("Order number %d does not exist", i);
-        }
-        printf("\n");
-    }
-    */
 }
 
 void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFloor){
@@ -49,15 +32,15 @@ void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFlo
         }
 
     }
-    //printf("Current floor = %d\n", currentFloor);
-    //printf("doorOpen = %d!\n", doorOpen_);
+    // If door is open, clear orders that are in the same floor.
     if (doorOpen_){
         doorOpen_ = 0;
-        //printf("Door open, so trying to clear orders!\n");
         if (orders_[N_FLOORS*3-1][1] == currentFloor){
             orders_[N_FLOORS*3-1][0] = -1;
             orders_[N_FLOORS*3-1][1] = -1;
         }
+        // When it has found an order in the same floor it moves the rest of the orders vector to the left, 
+        // effectively writing over the order that was to be discarded.
         for (int i = N_FLOORS*3-2; i >= 0; i--){
             if (orders_[i][1] == currentFloor){
                 for (int j = i; j < N_FLOORS*3-1; j++){
@@ -70,13 +53,11 @@ void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFlo
 }
 
 void ServerComputations__setDesired(){
-    // check whether currently serving, if not get first order
+    // check whether currently serving, if not get first order.
     int currentFloor = IoHandler__getCurrentFloor();
-    //printf("desired = %d\n", desired_);
     if ((desiredDir_ == 0) &&(orders_[0][0] != -1) ){
-        desired_ = orders_[0][1]; // desired floor
-        printf("desired = %d\n", desired_);
-        printf("current floor = %d\n", currentFloor);
+        desired_ = orders_[0][1]; // desired floor.
+        // Set desiredDir by taking the sign of desired - currentfloor.
         if ((desired_ - currentFloor) > 0){
             desiredDir_ = 1;
         } 
@@ -87,23 +68,7 @@ void ServerComputations__setDesired(){
             desiredDir_ = 0;
         }
     }
-    //if (currentFloor == 0){
-    //    if (orders_[0][0] != -1){
-    //        desiredDir_ = 1;
-    //    }
-    //    else{
-    //        desiredDir_ = 0;
-    //    }
-    //}
-    //else if(currentFloor == 3){
-    //    if (orders_[0][0] != -1){
-    //        desiredDir_ = -1;
-    //    }
-    //    else{
-    //        desiredDir_ = 0;
-    //    }
-    //}
-    //printf("desiredDir_ = %d\n", desiredDir_);
+    // Tell the motor to take the elevator in the desired direction.
     MotorController__setDir(desiredDir_);
 }
 
@@ -122,11 +87,10 @@ int ServerComputations__shouldWeStop(){
                     return 1;
                 }
                 // check if there are external orders going the same way as we are, if so stop.
-                //if (lastDir_ ==)
-                else if (((orders_[i][0] == 1) && (lastDir_ == -1 ))){
+                else if (((orders_[i][0] == 1) && (desiredDir_ == -1 ))){
                     return 1;
                 }
-                else if  ((orders_[i][0] == 0) && (lastDir_ == 1)){
+                else if  ((orders_[i][0] == 0) && (desiredDir_ == 1)){
                     return 1;
                 }
             }
@@ -138,22 +102,20 @@ int ServerComputations__shouldWeStop(){
 
 
 void ServerComputations__stopAtFloor(){
+    // Stop the elevator
     MotorController__setDir(0);
     if (IoHandler__getCurrentFloor() == desired_){
-        //desired_ = 0;
         desiredDir_ = 0;
     }
+    // turn on door light
     IoHandler__setLight(LIGHT_DOOR, 0, 1);
-    doorOpen_ = 1;
-    //int waitPeriodInMillis = 90000;
-    //clock_t startTime = clock();
+    doorOpen_ = 1; // bool used by other parts of system
+    // Microsleep for 3 sec, so we can add orders and lights while sleeping.
     for (int i = 0; i < 1000; i++){
         usleep(3000);
         Server__buttonLoop();
         Server__lightLoop();    
     }
-    //sleep(1);
-    //Server__buttonLoop();
-    //sleep(1);
+    // turn of door light
     IoHandler__setLight(LIGHT_DOOR, 0, 0);
 }
