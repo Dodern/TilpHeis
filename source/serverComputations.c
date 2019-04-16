@@ -59,7 +59,8 @@ void ServerComputations_setDesired(){
     if ((desiredDir_ == 0) &&(orders_[0][0] != -1) ){
         desired_ = orders_[0][1]; // desired floor.
         // Set desiredDir by taking the sign of desired - currentfloor. 
-        // Unless stop button has been pressed, in which case desired = -1;
+        // Unless stop button has been pressed, in which case desired = -1, 
+        // and this must be handled separately.
         if ((desired_ - currentFloor) > 0){
             desiredDir_ = 1;
         } 

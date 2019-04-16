@@ -90,7 +90,7 @@ void Server_motorLoop(){
         // Stop the elevator.
         ServerComputations_stopAtFloor();
     }
-    // If we already have stopped, reset the bool indicating we have.
+    // If not at floor, reset the bool indicating we have.
     else if(IoHandler_getCurrentFloor() == -1){
         hasStoppedAtFloor_ = 0;
     }
