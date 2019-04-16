@@ -56,8 +56,7 @@ int main() {
         printf("\n");
         Server__lightLoop();
         Server__motorLoop();
-        //int ret = nsleep(1);
-        //printf("sleep result %d\n",ret);
+        
     }
 
     return 0;
