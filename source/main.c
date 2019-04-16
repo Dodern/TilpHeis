@@ -38,22 +38,22 @@ int main() {
     while(1){
         Server__buttonLoop();
         //printf("Orders after:\n");
-        for (int i = 0; i < N_FLOORS*3; i++){
-            if (orders_[i][0] == 0){
-                printf("Order number %d = up, floor %d", i, orders_[i][1]+1);
-            }
-            if (orders_[i][0] == 1){
-                printf("Order number %d = down, floor %d", i, orders_[i][1]+1);
-            }
-            if (orders_[i][0] == 2){
-                printf("Order number %d = command, floor %d", i, orders_[i][1]+1);
-            }
-            if (orders_[i][0] == -1){
-                printf("Order number %d does not exist", i);
-            }
-            printf("\n");
-        }
-        printf("\n");
+        //for (int i = 0; i < N_FLOORS*3; i++){
+        //    if (orders_[i][0] == 0){
+        //        printf("Order number %d = up, floor %d", i, orders_[i][1]+1);
+        //    }
+        //    if (orders_[i][0] == 1){
+        //        printf("Order number %d = down, floor %d", i, orders_[i][1]+1);
+        //    }
+        //    if (orders_[i][0] == 2){
+        //        printf("Order number %d = command, floor %d", i, orders_[i][1]+1);
+        //    }
+        //    if (orders_[i][0] == -1){
+        //        printf("Order number %d does not exist", i);
+        //    }
+        //    printf("\n");
+        //}
+        //printf("\n");
         Server__lightLoop();
         Server__motorLoop();
         

@@ -29,7 +29,7 @@ void ServerComputations__setOrders(int buttonMatrix[N_FLOORS][3], int currentFlo
     // For each pressed button in the button matrix, go through orders_ looking for the same, if not add to orders_
     for (int r = 0; r < N_FLOORS; r++){
         if (!(currentFloor == r)){
-            for (int c = 3; c < 0; c --){
+            for (int c = 0; c < 3; c++){
                 if (buttonMatrix[r][c]){
                     int hasBeenSet = 0;
                     int buttonPressHandled = 0;
